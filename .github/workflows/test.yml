@@ -47,8 +47,3 @@ jobs:
 
       - name: Run Coverage
         run: uv run coverage xml
-
-      - uses: codecov/codecov-action@v5
-        with:
-          file: coverage.xml
-          env_vars: PYTHON
