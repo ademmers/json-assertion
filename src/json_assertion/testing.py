@@ -27,13 +27,13 @@ class _ExtendedFunctions(Functions):
 
 
 def json_assert_that(
-    json_data_document: str,
+    json_data_document: Any,
     expression: str | list[str],
 ) -> bool:
     """Asserts that the provided JSON document matches the expected structure.
 
     Args:
-        json_data_document (str): The JSON document as a string to be evaluated.
+        json_data_document (Any): The JSON document to be evaluated.
         expression (str | list[str]): The JMESPath expression(s) used.
                                       In this function this expects the JMESPath to return a boolean value.
 
@@ -59,7 +59,7 @@ def json_assert_that(
 
 
 def json_assert_that_with_predicate(
-    json_data_document: str,
+    json_data_document: Any,
     extract_expression: str,
     predicate: Predicate | list[Predicate],
 ) -> bool:
@@ -70,7 +70,7 @@ def json_assert_that_with_predicate(
     If a list of predicates is provided, all predicates must return True for the assertion to pass.
 
     Args:
-        json_data_document (str): The JSON document as a string to be evaluated.
+        json_data_document (Any): The JSON document to be evaluated.
         extract_expression (str): The JMESPath expression used to extract data.
         predicate (Predicate | list[Predicate]): A function or list of functions that return a boolean.
 
@@ -98,18 +98,21 @@ def _apply_predicate(
 
 
 @cache
-def _coerce_json(data: Any) -> dict:  # noqa: ANN401
+def _json_decode(data: str) -> Any:
     try:
-        if isinstance(data, str):
-            return json.loads(data)
+        return json.loads(data)
     except json.JSONDecodeError as ex:
         raise ValueError("The Provided JSON is not valid.") from ex
 
+
+def _coerce_json(data: Any) -> Any:  # noqa: ANN401
+    if isinstance(data, str):
+        return _json_decode(data)
     return data
 
 
 def _search_expression(
-    obj: dict,
+    obj: Any,
     expression: str,
 ) -> Any:  # noqa: ANN401
     try:
