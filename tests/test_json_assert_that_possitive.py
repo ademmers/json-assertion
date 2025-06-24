@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Final
+from typing import Any, Final
 
 import pytest
 from json_assertion import json_assert_that
@@ -63,6 +63,21 @@ def test_json_assert_that(json_content: str, case: Case) -> None:
     assert (
         json_assert_that(
             json_content,
+            case.expression,
+        )
+        == case.expected_result
+    )
+
+
+@pytest.mark.parametrize(
+    "case",
+    cases,
+    ids=[case.name for case in cases],
+)
+def test_json_assert_that_data(json_data: Any, case: Case) -> None:
+    assert (
+        json_assert_that(
+            json_data,
             case.expression,
         )
         == case.expected_result
