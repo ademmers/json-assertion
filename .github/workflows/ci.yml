@@ -54,12 +54,10 @@ jobs:
       - name: Run Coverage
         run: uv run coverage xml
 
-      - name: Publish coverage to PR
-        uses: 5monkeys/cobertura-action@v14
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
         with:
-          path: coverage.xml
-          minimum_coverage: 80
-          repo_token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   release:
     name: Release
