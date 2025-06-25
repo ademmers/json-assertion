@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.1.0 (2025-06-25)
+
+### Features
+
+- Add jmespath functions key_values and first
+  ([`333d604`](https://github.com/ademmers/json-assertion/commit/333d604364f184e900675b9f96701db7c4da72da))
+
+
 ## v1.0.1 (2025-06-25)
 
 ### Bug Fixes
