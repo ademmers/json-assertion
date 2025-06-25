@@ -49,13 +49,19 @@ jobs:
         uses: jakebailey/pyright-action@v2
 
       - name: Run tests
-        run: uv run pytest --cov --cov-report term-missing
+        run: uv run pytest --cov --cov-report term-missing --junitxml=junit.xml -o junit_family=legacy
 
       - name: Run Coverage
         run: uv run coverage xml
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
