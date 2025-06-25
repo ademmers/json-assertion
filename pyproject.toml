@@ -35,7 +35,8 @@ source = [
 ]
 
 [tool.semantic_release]
-build_command = "uv sync --no-editable"
+build_command = "uv sync --no-editable && uv build"
+commit_message = "chore(release): {version} [skip-rerelease] [skip-retest]"
 assets = ["uv.lock"]
 version_toml = [
     "pyproject.toml:project.version",
