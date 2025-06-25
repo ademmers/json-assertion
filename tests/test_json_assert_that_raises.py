@@ -52,6 +52,12 @@ cases: Final[list[Case]] = [
         raised_type=ValueError,
         content_match="Error processing JMESPath expression",
     ),
+    Case(
+        name="extended_functions_first_non_array",
+        expression="first(long_string)",
+        raised_type=ValueError,
+        content_match="Invalid JMESPath expression",
+    ),
 ]
 
 
