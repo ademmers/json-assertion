@@ -1,6 +1,6 @@
 [project]
 name = "json-assertion"
-version = "0.3.0"
+version = "1.0.0"
 description = "Package assisting in asserting JMESPath queries against JSON data."
 readme = "README.md"
 authors = [{ name = "Arne Demmers", email = "arne.demmers@gmail.com" }]
