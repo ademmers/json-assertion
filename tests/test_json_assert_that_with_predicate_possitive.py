@@ -67,6 +67,24 @@ cases: Final[list[Case]] = [
         ],
         expected_result=False,
     ),
+    Case(
+        name="extended_functions_key_values_and_first",
+        expression="length(first(key_values(@)[?starts_with(key, 'any')].value))",
+        predicate=lambda v: v == 3,
+        expected_result=True,
+    ),
+    Case(
+        name="extended_functions_first_empty_list",
+        expression="first(any_field[2])",
+        predicate=lambda v: v is None,
+        expected_result=True,
+    ),
+    Case(
+        name="extended_functions_first_non_empty_list",
+        expression="first(first(any_field))",
+        predicate=lambda v: v == True,  # noqa: E712
+        expected_result=True,
+    ),
 ]
 
 
