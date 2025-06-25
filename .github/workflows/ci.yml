@@ -17,7 +17,7 @@ jobs:
   test:
     name: test
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip retest]')
+    if: (github.event_name == 'push' || github.event_name == 'pull_request') && !contains(github.event.head_commit.message, '[skip retest]')
     strategy:
       fail-fast: false
       matrix:
