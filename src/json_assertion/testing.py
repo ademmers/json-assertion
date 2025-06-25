@@ -25,6 +25,16 @@ class _ExtendedFunctions(Functions):
     def _func_all(self, array: list[Any]) -> bool:
         return all(array)
 
+    @signature({"types": ["object"]})
+    def _func_key_values(self, obj: dict[str, Any]) -> list[dict[str, Any]]:
+        return [{"key": k, "value": v} for k, v in obj.items()]
+
+    @signature({"types": ["array"]})
+    def _func_first(self, array: list[Any]) -> Any:
+        if not array:
+            return None
+        return array[0]
+
 
 def json_assert_that(
     json_data_document: Any,
