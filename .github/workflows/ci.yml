@@ -46,7 +46,7 @@ jobs:
           args: "format --check --diff"
 
       - name: Run pyright
-        uses: jakebailey/pyright-action@v2
+        uses: jakebailey/pyright-action@b5d50e5cde6547546a5c4ac92e416a8c2c1a1dfe # v2.3.2
 
       - name: Run tests
         run: uv run pytest --cov --cov-report term-missing --junitxml=junit.xml -o junit_family=legacy
