@@ -38,10 +38,10 @@ jobs:
         run: uv sync --locked --all-extras --dev
 
       - name: Run ruff check
-        uses: astral-sh/ruff-action@v3
+        uses: astral-sh/ruff-action@eaf0ecdd668ceea36159ff9d91882c9795d89b49 # v3.4.0
 
       - name: Run ruff format
-        uses: astral-sh/ruff-action@v3
+        uses: astral-sh/ruff-action@eaf0ecdd668ceea36159ff9d91882c9795d89b49 # v3.4.0
         with:
           args: "format --check --diff"
 
