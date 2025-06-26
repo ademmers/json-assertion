@@ -27,10 +27,10 @@ jobs:
           - "3.12"
           - "3.13"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v6
+        uses: astral-sh/setup-uv@bd01e18f51369d5a26f1651c3cb451d3417e3bba # v6
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -38,15 +38,15 @@ jobs:
         run: uv sync --locked --all-extras --dev
 
       - name: Run ruff check
-        uses: astral-sh/ruff-action@v3
+        uses: astral-sh/ruff-action@eaf0ecdd668ceea36159ff9d91882c9795d89b49 # v3
 
       - name: Run ruff format
-        uses: astral-sh/ruff-action@v3
+        uses: astral-sh/ruff-action@eaf0ecdd668ceea36159ff9d91882c9795d89b49 # v3
         with:
           args: "format --check --diff"
 
       - name: Run pyright
-        uses: jakebailey/pyright-action@v2
+        uses: jakebailey/pyright-action@b5d50e5cde6547546a5c4ac92e416a8c2c1a1dfe # v2
 
       - name: Run tests
         run: uv run pytest --cov --cov-report term-missing --junitxml=junit.xml -o junit_family=legacy
@@ -55,13 +55,13 @@ jobs:
         run: uv run coverage xml
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
+        uses: codecov/test-results-action@47f89e9acb64b76debcd5ea40642d25a4adced9f # v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
@@ -81,7 +81,7 @@ jobs:
     steps:
       # Below steps are almost direct taken from python-semantic-release documentation
       # cfr. https://python-semantic-release.readthedocs.io/en/latest/configuration/automatic-releases/github-actions.html#common-workflow-example
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
@@ -132,21 +132,21 @@ jobs:
       - name: Action | Semantic Version Release
         id: release
         # Adjust tag with desired version if applicable.
-        uses: python-semantic-release/python-semantic-release@v10
+        uses: python-semantic-release/python-semantic-release@f9e152fb36cd2e590fe8c2bf85bbff08f7fc1c52 # v10
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           git_committer_name: "github-actions"
           git_committer_email: "actions@users.noreply.github.com"
 
       - name: Publish | Upload to GitHub Release Assets
-        uses: python-semantic-release/publish-action@v10
+        uses: python-semantic-release/publish-action@ca88900e4d435c6645d47e5f1e7f108e94c77f05 # v10
         if: steps.release.outputs.released == 'true'
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           tag: ${{ steps.release.outputs.tag }}
 
       - name: Upload | Distribution Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: distribution-artifacts
           path: dist
@@ -166,7 +166,7 @@ jobs:
       url: https://pypi.org/p/json-assertion
     steps:
       - name: Setup | Download Build Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         id: artifact-download
         with:
           name: distribution-artifacts
